@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Paper Search{% endblock title %}
+
+{% block extrahead %}
+{% load bootstrap %}
+{% endblock %}
+
+{% block content %}
+      <form id="getform" action="" method="get">
+        <input id="query" type="text" size="60" name="query" placeholder="検索ワードを入力">
+        <input type="submit" class="btn btn-primary" value="検索">
+      </form>
+
+      {% if search_flag == '1' and result_num == '0' %}
+        検索ワード"<b>{{ query }}</b>" が
+        <font color="red">対象のPaperは見つかりません</font><br>
+      {% elif search_flag == '1' %}
+        検索ワード"<b>{{ query }}</b>" の
+        <font color="red">検索結果が {{ result_num }} 件見つかりました</font><br><br>
+      {% endif %}
+
+      {% load mytag %}
+      {% for paper_id in p_id %}
+        <div style="padding: 20px; margin-bottom: 10px; border: 1px solid #333333; background: rgba(255,255,255,0.6);">
+          <b><a href="{% url 'search:content' paper_id=paper_id %}">{{ result_title|show_list:forloop.counter0 }}</a></b><br>
+          {% if len_abst|show_list:forloop.counter0 <= 200 %}
+            {{ result_abst|show_list:forloop.counter0 }}
+          {% else %}
+            {{ result_abst|show_list:forloop.counter0 }}...
+          {% endif %}
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+{% endblock content %}

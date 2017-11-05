@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Paperの内容{% endblock title %}
+
+{% block extrahead %}
+{% load bootstrap %}
+<style>
+.bk{
+  background: url("{% static 'image/document_syorui_pen.png' %}") center center / contain no-repeat fixed;
+}
+.bkRGBA{
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+}
+</style>
+{% endblock %}
+{% block body %}
+  <body class="bk">
+    <div class="bkRGBA">
+{% endblock %}
+{% block content %}
+    <br>
+    <h2>{{ title }}</h2>
+    <font size=4>{{ abst }}</font>
+{% endblock content %}
